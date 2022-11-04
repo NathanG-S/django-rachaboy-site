@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% extends 'post/main.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Редактирование поста</title>{% endblock %}
+   
+    {% block search2 %}
+    {% endblock %}
+</head>
+<body>
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style>
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+                  
+    }
+    .search_form{
+        display: none;
+    }
+    .dark-mode input{
+        color: #e9e9e9;
+        background-color: rgb(49, 49, 49);
+    }
+
+    .dark-mode #cke_1_top{
+        color: #e9e9e9;
+        background-color: rgb(49, 49, 49);
+    }
+    .dark-mode #cke_1_top a {
+        color: white;
+    }
+    .dark-mode #cke_1_top span{
+        background-color: white !important;
+    }
+    .footer{
+        background-color: white !important;
+    }
+    label{
+        display: flex !important;
+    }
+    .django-ckeditor-widget{
+        width: 100%;
+    }
+@media screen and (max-width: 890px){
+  .form{
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+  }
+  main{
+    padding: 13px !important;
+    margin: 0;
+  }
+}
+</style>
+    {% if request.user == post.author %}
+    <form action="", method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form">
+            <div class="form-group col-md-6 mb-0">
+              {{form.media}}
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.content|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.rubric|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.tags|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.image|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.description|as_crispy_field }}
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 10px; margin: 40px;">Сохранить</button>
+        </div>
+        
+    </form>
+    
+    {% else %}
+    <img src="../../media/error.gif" alt="Lorem" style="margin-top: 100px; margin-left: 100px;">
+    <h1 style="margin-top:100px; margin-left: 2px;">Вы не являетесь автором поста</h1>
+    {% endif %}
+{% endblock %}
+
+</body>
+</html>

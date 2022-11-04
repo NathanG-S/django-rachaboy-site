@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% extends 'post/main.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Создание поста</title>{% endblock %}
+    {% block search %}
+    {% endblock %}
+    {% block search2 %}
+    {% endblock %}
+    {% block content %}
+<style>
+    aside{
+        width: 45%;
+        float: right;
+        position: relative;
+        top: -51.8em;
+        margin-right: 1em;
+    }
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    label{
+        display: flex !important;
+    }
+    .django-ckeditor-widget{
+        width: 100%;
+    }
+@media screen and (max-width: 890px){
+  .form{
+    display: flex;
+    flex-direction: column;
+    align-items: normal;
+  }
+  main{
+    padding: 13px !important;
+    margin: 0;
+  }
+}
+</style>
+</head>
+<body>
+{% load crispy_forms_tags %}
+
+    <form action="", method="post" style="margin-top: 20px; margin-left: 10px;" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form">
+            <div class="form-group col-md-6 mb-0" id="formfield">
+              {{form.media}}
+              {{ form.title|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.content|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.rubric|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.tags|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.image|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.description|as_crispy_field }}
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 10px; margin: 40px;">Опубликовать</button>
+        </div>
+        
+        
+        
+    </form>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,147 @@
+{% extends 'post/main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'to_authors.css' %}">
+{% endblock %}
+{% block content %}
+{% block search2 %}
+{% endblock %}
+<main>
+    <div class="main">
+
+    <div class="main_div">
+      {% block topic %}
+      <div class="topic" style="background-color: white; width: 55%;  padding: 5px; overflow: hidden;">
+        <h1 style="-webkit-font-smoothing: antialiased;
+        color: #333;
+        font-size: 1.24375rem;
+        font-weight: 700;
+        line-height: 1.75rem;
+        margin: 0;
+        text-decoration: none;
+        overflow: hidden;
+        text-overflow: ellipsis;">Для авторов</h1>
+        <p>
+      </div>
+
+      {% endblock %}
+
+      <div class="post">
+        <h2 style="font-family: Fira Sans,sans-serif; font-size: 1.25rem;
+        line-height: 1.625rem;">Как оформить публикацию</h2>
+
+        <p>Самое важное, что есть на сайте — это публикации. Практика показывает, что можно разместить почти любой формат: небольшой анонс и лонгрид-обзор, интервью, фотоотчёт, урок и многое-многое другое. Довольно часто успех публикации зависит и от её оформления. Приятно оформленный материал читать одно удовольствие. Ознакомьтесь, пожалуйста, с полезными советами по оформлению материала.</p>
+        <h2 style="font-family: Fira Sans,sans-serif; font-size: 1.25rem;
+        line-height: 1.625rem;">Текст</h2>
+        <p>На сайте существует специальный WYSIWYG редактор. Не стоит писать публикации, используя как можно больше функций редактора, разработчик специально ограничил функционал редактора и оставил только самое необходиое для создания информативных постов. Вот несколько советов:</p>
+        <ul>
+            <li>
+                <p>
+                    <strong>
+                        Абзацы
+                    </strong>
+                </p>
+                <p>
+                    Не стоит вставлять тексты одной сплошной простынёй. Случайный скролл колесом (или неаккуратное касание до планшета) и всё, вы уже потеряли место, где читали. Разбивайте текст на небольшие абзацы, по несколько предложений в каждом.
+
+                   <p>Абзацы текста можно разделять картинками. Это особенно хорошо, если они при этом ещё и уместны.</p> 
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>
+                        Заголовки
+                    </strong>
+                </p>
+                <p>
+                    На сайте как и в HTML-разметке доступно 3 уровня заголовков: самый крупный (H1), поменьше (H2) и средний (H3).
+                    Используйте их для структурирования текста. Для основных разделов используйте самый крупный заголовок, для подразделов-поменьше и так далее. Не стоит делать крупный заголовок просто так.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>
+                        Ссылки
+                    </strong>
+                    <p>Не стоит вставлять ссылки прямым текстом (к примеру https://127.0.0.1:8000/), привязывайте их к какому-либо слову</p>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Теги</strong>
+                </p>
+                <p>При написании тегов к публикации будьте внимательны, по тегам другие пользователи смогут найти вашу публикацию. Старайтесь не допустить орфографических ошибок ведь редактор вам этого не покажет, а тег будет создан</p>
+            </li>
+            <li>
+                <p>
+                    <strong>Изображения</strong>
+                </p>
+                <p>Старайтесь не использовать слишком большие изображения для обложки и содержания публикации. Все изображения ограничены по высоте и ширине поэтому вы просто можете ничего не увидеть на картинке, тем более на экранах поменьше(мобильные устройства и планшеты).</p>
+            </li>
+          
+        </ul>
+    
+    </div>
+  </div>
+  <div class="sidebar">
+
+      
+    <div class="related_posts">
+      <section>
+        <div class="">
+          <header class="related_header">
+            <h2 class="related_h2">Разделы</h2>
+          </header>
+          <ul>
+            
+            <li class="related_li">
+              <article>
+                <span class="related_span"><a href="#" class="post_href_related">WYSIWYG редактор </a></span>
+       
+              </article>
+            </li>
+            <li class="related_li">
+                <article>
+                  <span class="related_span"><a href="#" class="post_href_related">Устройство сайта</a></span>
+         
+                </article>
+              </li>
+              <li class="related_li">
+                <article>
+                  <span class="related_span"><a href="#" class="post_href_related">Настройки</a></span>
+         
+                </article>
+              </li>
+              <li class="related_li">
+                <article>
+                  <span class="related_span"><a href="{% url 'feedback' %}" class="post_href_related">Техническая поддержка</a></span>
+         
+                </article>
+              </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <div class="aside">
+      <aside class="aside-main">
+        <div class="info" style="margin: 10px;">
+          <h4> <a href="{% url 'about' %}" class="about_link"> Правила сайта</a></h4>
+          <p style="font-family:Arial;">
+              Обычно IT-специалисты и интересующиеся данной сферой — это люди культурные, уважающие не только себя, но и собеседников и читателей. Чтобы ресурс мог оставаться площадкой для общения таких людей, существуют правила, за нарушение которых модераторы могут понизить права аккаунта до ReadOnly.
+              Вот список того, чего не следует делать:
+          </p>
+          <ul style="list-style: disc;">
+            <li>
+              <p><strong>Просим вас не нарушать правила этой площадки во избежание различных ограничений и конфликтов</strong></p>
+            </li>
+          </ul>
+        
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</main>
+{% endblock %}

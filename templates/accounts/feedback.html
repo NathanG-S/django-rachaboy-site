@@ -1,0 +1,56 @@
+{% extends 'post/main.html' %}
+
+
+
+{% block topic %}
+{% endblock %}
+{% block search2 %}
+{% endblock %}
+{% block content %}
+<div class="page1">
+<style>
+    body{
+        background-color: #F0F0F0;
+    }
+    .search_form{
+        display: none;
+    }
+    #nav2{
+        display: none;
+    }
+    main{
+        height: 60vh;
+        justify-content: center;
+    }
+    .main{
+        width: 100%;
+        max-width: 700px;
+    }
+    form{
+        width: 100%;
+    }
+    button{
+        margin-top: 20px;
+    }
+    .theme-btn{
+        margin: 0;
+    }
+</style>
+<main>
+    <div class="main">
+        <div class="main_div">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="">Email на который придет ответ</label>
+                {{form.email}}
+                <label for="">Текст сообщения</label>
+                {{form.text}}
+                <button type="submit" class="btn btn-success">Отправить</button>
+            </form>
+            
+        </div>
+    </div>
+</main>
+</div>
+{% endblock %}
+    

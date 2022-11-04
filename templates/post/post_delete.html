@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% extends 'post/main.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>Удаление поста</title>{% endblock %}
+    {% block search %}
+    {% endblock %}
+    {% block search2 %}
+    {% endblock %}
+</head>
+<body>
+{% load crispy_forms_tags %}
+{% block content %}  
+<style>
+    main{
+        display: flex!important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .post{
+        width: 45% ;
+        margin-top: 30px;
+    }
+    #nav2{
+        display: none;
+    }
+    @media screen and (max-width: 890px){
+    .post {
+        min-width: 0px;
+        width: 100%;
+        padding: 13px;
+        padding-left: 10px;
+        margin-left: 0px;
+        box-sizing: content-box;
+        position: relative;
+        margin-right: 3px;
+        margin-top: 10px;
+    }
+    }
+</style>
+<main>
+
+
+    {% if request.user == object.author %}
+    <h6>Вы уверены что хотите удалить эту публикацию?</h6>
+    <div class="post">
+        
+        <div class="post-img-author">
+          {% if object.author.profile.profile_pic %}
+          <a href="{% url 'get_profile' object.author.profile.user.id %}">
+          <img src="{{object.author.profile.profile_pic.url}}" alt="" style="max-width: 37px; max-height: 37px; border-radius:50%; margin-right: 10px;">
+          </a>
+          {% endif %}
+          <h3 style="margin-top: 15px;" class="post_h3">{{object.author}}</h3>
+          <span  class ="post_public_time">{{object.published}}</span>
+        </div>
+        {% if object.rubric %}
+        <a href="{{post.rubric.get_absolute_url}}" style="-webkit-font-smoothing: antialiased;color: #5e6973;font-size: 16px;font-weight: 500;line-height: 1.5rem;">{{post.rubric}}</a>
+        {% endif %}
+          {% if object.image %}
+          <h2><a href="{{post.get_absolute_url}}" class="post_href">{{object.title}}</a></h2>
+          <div class="image">
+            <img src="{{object.image.url}}" alt="" class="post-img">
+          </div>
+          
+          {% endif %}
+          <div class="post_content">
+              {{ object.description|truncatewords:600|truncatechars:700|safe }}
+              <br>
+              <a href="{{post.get_absolute_url}}" class="read_next">Читать далее</a>
+          </div>
+          
+
+          <a href="{% url 'by_comment' object.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" fill="currentColor" class="bi bi-chat-text" viewBox="0 0 16 16" style="margin-right:10px; color:#558CB7;">
+            <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
+            <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8zm0 2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+          </svg></a>
+    
+  
+        <a href="{% url 'favourite_add' object.id %}" style="margin-right:10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16" id="bookmark" style="color:#558CB7;">
+                <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
+            </svg>
+        </a>
+                  
+        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" style="color:#558CB7;">
+          <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+          <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+        </svg>
+          <span class = 'span_post'>{{object.total_views}}</span>
+
+          
+          {% if request.user == object.author %}
+          <a href="{% url 'update_post' object.id %}" style="color: #558CB7;">Редактировать</a>
+          
+          {% endif %}
+      </div>
+    <form action="", method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button class = "btn btn-danger" type="submit" style="margin-top: 15px; margin: 40px; margin-bottom: 50px;">Удалить</button>
+    </form>
+    {% else %}
+    <img src="../../media/error.gif" alt="Lorem" style="margin-top: 100px; margin-left: 100px;">
+    <h1 style="margin-top:100px; margin-left: 2px;">Вы не являетесь автором поста</h1>
+    {% endif %}
+</main>
+{% endblock %}
+</body>
+</html>
