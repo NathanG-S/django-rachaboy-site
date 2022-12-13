@@ -5,13 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     {% block title %}<title>Создание поста</title>{% endblock %}
     {% block search %}
     {% endblock %}
     {% block search2 %}
     {% endblock %}
     {% block content %}
+    
 <style>
+    .page{
+        min-height: 0;
+    }
+    body{
+        background-color: #f0f0f0;
+    }
     aside{
         width: 45%;
         float: right;
@@ -37,6 +45,9 @@
     flex-direction: column;
     align-items: normal;
   }
+  .form-group{
+    width: 100%;
+  }
   main{
     padding: 13px !important;
     margin: 0;
@@ -47,7 +58,7 @@
 <body>
 {% load crispy_forms_tags %}
 
-    <form action="", method="post" style="margin-top: 20px; margin-left: 10px;" enctype="multipart/form-data">
+    <form action="", method="post" style="margin-top: 20px; margin-left: 10px; margin-right: 10px;" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form">
             <div class="form-group col-md-6 mb-0" id="formfield">
@@ -75,6 +86,9 @@
         
         
     </form>
+    <script>hljs.initHighlightingOnLoad();
+    
+    </script>
 {% endblock %}
 </body>
 </html>

@@ -5,7 +5,6 @@ from pyexpat import model
 from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
 from django.urls import reverse
 from slugify import slugify
 from autoslug import AutoSlugField
@@ -37,17 +36,27 @@ class Post(models.Model):
     image = models.ImageField(upload_to = 'post_main_images', blank = True, null = True)
     description = models.TextField(max_length=1200)
     views = models.ManyToManyField(Ip, related_name = 'post_views', blank = True)
-    rate = models.PositiveIntegerField(default = 0)
+    rates_plus = models.ManyToManyField(User, verbose_name='Рейтинг плюс', default=None, blank=True, related_name='rate_plus')
+    rates_minus = models.ManyToManyField(User, verbose_name='Рейтинг минус', default=None, blank=True, related_name='rate_minus')
     tags = TaggableManager()
 
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ['-published']
+
     def __str__(self):
         return self.title or ''
+
     def total_views(self):
         return self.views.count()
+
+    def total_fav(self):
+        return self.favourites.count()
+        
+    def total_rate(self):
+        return self.rates_plus.count() - self.rates_minus.count()
+
     def get_absolute_url(self):
         return reverse('post', kwargs = {'post_slug' : self.slug})
 
@@ -82,12 +91,12 @@ class Comment(models.Model):
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
         ordering = ['-published']
-
+#Добавить followers через MTM
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    profile_pic = models.ImageField(upload_to = 'profile_images', null = True, blank = True)
-    bio = models.TextField()
-
+    profile_pic = models.ImageField(upload_to = 'profile_images', default='error.gif', null = True, blank = True)
+    bio = models.TextField(max_length=255, blank=True)
+    git_href = models.URLField(max_length=200, blank=True, null=True)
     def __str__(self):
         return self.user.username or ''
         

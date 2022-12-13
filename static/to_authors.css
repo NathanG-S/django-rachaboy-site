@@ -72,7 +72,7 @@ main{
     flex-direction: column;
     background-color: white;
     height: fit-content;
-    margin-right: 70px;
+    margin-right: 50px;
   }
   .aside-main{
     background-color: white;
@@ -685,7 +685,7 @@ body{
 }
 .dark-mode{
   color: white;
-  
+  background-color: #222!important;
 }
 .dark-mode #nav{
   background-color: #1c1c1c!important;
@@ -792,4 +792,20 @@ body{
 }
 .dark-mode .link:hover{
   color: #4C8EAB;
+}
+.dark-mode .link:hover{
+  color: #a4dced;
+  text-shadow: 0px 0px 10px #03bdba;
+}
+.dark-mode .post_href_related:hover{
+  text-shadow: 0px 0px 10px #00fffc;
+}
+.navbar-brand:hover{
+  transition: .3s;
+  text-shadow: 2px 2px 2px rgb(0, 68, 255);
+}
+
+.dark-mode .navbar-brand:hover{
+  transition: .3s;
+  text-shadow: 2px 2px 2px rgb(0, 247, 255);
 }

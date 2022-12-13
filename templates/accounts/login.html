@@ -192,36 +192,44 @@ a:hover{
 a{
 	color: #03e9f4;
 }
+p{
+  margin-top: 17px;
+  color: white;
+  margin-bottom: 0;
+}
 	</style>
 
 </head>
 <body>
 	<div class="login-box">
-		<h2>Login</h2>
+		<h2>Авторизация</h2>
 		<form method="POST">
 			{% csrf_token %}
 		  <div class="user-box">
 			<input type="text" name="username" required="">
-			<label>Username</label>
+			<label>Имя пользователя</label>
 		  </div>
 		  <div class="user-box">
 			<input type="password" name="password" required="">
-			<label>Password</label>
+			<label>Пароль</label>
 		  </div>
-		  
+
 			<button type="submit" value="Login">
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
-				Login
+				Войти
 				
 			  </button>
-			  
+
 		  <div class="button_login">
-		  <a href="{% url 'reset_password' %}">Forgot password?</a>
-		  <a href="{% url 'register' %}">Register</a>
+		  <a href="{% url 'reset_password' %}">Забыли пароль?</a>
+		  <a href="{% url 'register' %}">Регистрация</a>
 		  </div>
+      {% for msg in messages %}
+      <p>{{msg}}</p>
+      {% endfor %}
 		</form>
 	  </div>
 </body>

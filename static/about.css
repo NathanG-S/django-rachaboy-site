@@ -12,6 +12,14 @@ main{
     max-width: 1200px;
     margin-right: 16px;
   }
+  body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  footer{
+    margin-top: auto!important;
+  }
   .main{
     display: flex;
   }
@@ -610,8 +618,8 @@ ul{
   margin-right: 5px;
 }
 .dark-mode{
-  color: white;
-  
+  color: rgb(226, 226, 226);
+  background-color: #222;
 }
 .dark-mode main{
   background-color: #222;
@@ -664,6 +672,9 @@ ul{
 .dark-mode .about_link{
   color: white;
 }
+.dark-mode #nav{
+  background-color: #1c1c1c!important;
+}
 .dark-mode .about_link:hover{
   color:#a4dced;
 }
@@ -697,7 +708,9 @@ ul{
   transition: .3s;
   text-shadow: 2px 2px 2px rgb(0, 68, 255);
 }
-
+#nav{
+  background-color: #303B44;
+}
 .dark-mode .navbar-brand:hover{
   transition: .3s;
   text-shadow: 2px 2px 2px rgb(0, 247, 255);

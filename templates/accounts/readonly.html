@@ -1,0 +1,22 @@
+{% extends 'post/main.html' %}
+{% load static %}
+{% block title %} <title>John banned you</title> {% endblock %}
+{% block content %}
+<style>
+    #nav2{
+        display: none;
+    }
+</style>
+{% block css %}<link rel="stylesheet" href="{% static 'about.css' %}">{% endblock %}
+
+<div class="info" style="margin-top: 40px;">
+    <h3>Администратор сайта понизил права вашего аккаунта до ReadOnly, поэтому вам недоступны некоторые возможности сайта, такие как:</h3>
+    <ul>
+        <li>Публикация новых постов</li>
+        <li>Редактирование своих постов</li>
+        <li>Изменение рейтинга постов</li>
+    </ul>
+    <h3>Просим вас больше не нарушать правил сайта, иначе ваш аккаунт будет полностью и невозвратно заблокирован. По всем вопросам обращаться в <a href="{% url 'feedback' %}" style="text-decoration: none;">Тех. поддержку</a></h3>
+</div>
+
+{% endblock %}

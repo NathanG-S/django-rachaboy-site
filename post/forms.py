@@ -23,6 +23,17 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        
+    def clean(self):
+        clean_data = super(CreateUserForm, self).clean()
+        email = clean_data.get('email')
+        username = clean_data.get('username')
+        if not email:
+            raise forms.ValidationError(('Введите e-mail'), code = 'email')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError(u'Пользователь с таким e-mail уже существует.')
+            
+        
 
 class CommentForm(ModelForm):
     class Meta:
@@ -50,11 +61,11 @@ class UpdateUserForm(forms.ModelForm):
 
 class UpdateProfileForm(forms.ModelForm):
     profile_pic = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
-
+    bio = forms.CharField(max_length=255,widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    git_href = forms.URLField(max_length=200, widget=forms.TextInput(attrs={'class' : 'form-control'}))
     class Meta:
         model = Profile
-        fields = ['profile_pic', 'bio']
+        fields = ['profile_pic', 'bio', 'git_href',]
 
 class feedbackform(forms.Form):
     email = forms.EmailField(required=True,

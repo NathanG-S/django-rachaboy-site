@@ -22,7 +22,8 @@ main{
 .post{
     background-color: white;
     margin-top: 15px;
-    width: 45%;
+    width: 55%;
+    max-width: 800px;
     min-width: 800px;
     border-bottom: 1px solid #eaeaea;
     box-sizing: border-box;
@@ -55,12 +56,13 @@ main{
   align-items: center;
 }
 .span_post1{
-  margin-right: 17px;
+  margin-right: 35px;
   margin-top: 5px;
-  color: #5f5f5f; 
-  font-size: 12px; 
-  font-weight: 500; 
-  font-family: 'Fira Sans', sans-serif; 
+  color: #798e98;
+  font-size: .8125rem;
+  font-weight: 700;
+  margin-left: 2px;
+  line-height: 1;
 }
 .links-bottom>a{
 margin-right: 5px!important;
@@ -72,14 +74,7 @@ margin-right: 5px!important;
   color: #414b50;
   font-weight: 700;
 }
-.span_post1 {
-  margin-right: 17px;
-  margin-top: 5px;
-  color: #5f5f5f;
-  font-size: 12px;
-  font-weight: 500;
-  font-family: 'Fira Sans', sans-serif;
-}
+
 .topic{
   min-width: 800px;
 }
@@ -292,7 +287,8 @@ main{
   background-color: white;
   margin-top: 20px;
   
-  width: 45%;
+  width: 55%;
+  max-width: 800px;
   min-width: 800px;
   border-bottom: 1px solid #eaeaea;
   box-sizing: border-box;
@@ -333,7 +329,12 @@ main{
 .about_link:hover{
   color: #4C8EAB;
 }
-
+body{
+  background-color: #F0F0F0!important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 .theme-btn{
   background: none;
@@ -342,7 +343,7 @@ main{
 }
 .dark-mode{
   color: white;
-  
+  background-color: #222 !important;
 }
 .dark-mode #nav{
   background-color: #1c1c1c!important;
@@ -350,6 +351,9 @@ main{
 .links-bottom {
   display: flex;
   align-items: center;
+}
+#nav {
+  background-color: #303B44;
 }
 .dark-mode .span_post1{
   color: #dadada;
@@ -473,17 +477,25 @@ main{
   color: white;
 }
 
-
+.rating{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-right: 30px;
+}
+.links-bottom>a{
+  margin-right: 30px!important;
+  }
 
 .site-footer{
-
+  margin-top: auto;
   background-color:#2C3135;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
   color:#737373;
   position: relative;
-  top: 80px;
+  
 }
 .site-footer hr
 {

@@ -22,7 +22,8 @@ main{
 .post{
     background-color: white;
     margin-top: 15px;
-    width: 45%;
+    width: 55%;
+    max-width: 800px;
     min-width: 800px;
     border-bottom: 1px solid #eaeaea;
     box-sizing: border-box;
@@ -119,6 +120,22 @@ main{
   font-weight: 500; 
   font-family: 'Fira Sans', sans-serif; 
 
+}
+.git_href{
+  margin-bottom: 10px;
+}
+.links-bottom{
+  display: flex;
+  align-items: center;
+}
+.links-bottom > a{
+  margin-right: 30px;
+}
+.rating{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-right: 30px;
 }
 .post_h3{
     font-family: Arial, Helvetica, sans-serif;
@@ -312,7 +329,8 @@ main{
   background-color: white;
   margin-top: 20px;
   
-  width: 45%;
+  width: 55%;
+  max-width: 800px;
   min-width: 800px;
   border-bottom: 1px solid #eaeaea;
   box-sizing: border-box;
@@ -385,7 +403,7 @@ main{
   transition: .4s;
 }
 .span_post1{
-  margin-right: 13px;
+  margin-right: 30px;
   margin-top: 5px;
   color: #798e98;
   font-size: .8125rem;

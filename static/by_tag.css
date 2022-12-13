@@ -3,6 +3,9 @@ main{
     
     display: flex;
   }
+  body{
+    background-color: #F0F0F0 !important;
+  }
   .main_div{
     width: -webkit-fill-available;
     display: flex;
@@ -165,6 +168,7 @@ main{
     main{
       padding: 13px !important;
       margin: 0;
+      display: block!important;
     }
   }
   
@@ -206,13 +210,38 @@ main{
     font-family: 'Fira Sans', sans-serif; 
   
   }
+  .dark-mode #btn{
+    color: white!important;
+  }
+  .rate{
+    display: flex;
+    align-items: center;
+}
+.views{
+  display: flex;
+  align-items: center;
+}
+.fav{
+  display: flex;
+  align-items: center;
+}
+  @media screen and (max-width: 815px){
+    .links-bottom{
+        justify-content: space-between;
+    }
+    }
+  .links-bottom{
+    display: flex;
+    align-items: center;
+  }
   .span_post1{
-    margin-right: 17px;
+    margin-right: 35px;
     margin-top: 5px;
-    color: #5f5f5f; 
-    font-size: 12px; 
-    font-weight: 500; 
-    font-family: 'Fira Sans', sans-serif; 
+    color: #798e98;
+    font-size: .8125rem;
+    font-weight: 700;
+    margin-left: 2px;
+    line-height: 1;
   }
   .post_rubric{
       -webkit-font-smoothing: antialiased;
@@ -397,8 +426,18 @@ main{
     height: 2.5em;
     line-height: 3em;
     
-    border: 1px solid #d5dddf;
+    border: 1px solid #e1e1e1;;
     padding: 0 1.5em;
+    transition: .3s;
+  }
+  .dark-mode .tag_form > input{
+    border-color:#4e4e4e ;
+  }
+  .search_form{
+    display: none;
+  }
+  .search_form2{
+    display: none;
   }
   .tag_form > input:focus{
     border-color: #a3c4e2!important;
@@ -708,17 +747,46 @@ main{
   padding: 14px 16px;
   line-height: .9375rem;
   font-size: .9375rem;
+  transition: .3s;
+  background-color: #F8F8F8;
+}
+.dark-mode .btnFunc > a{
+  color: rgb(207, 207, 207);
+}
+.dark-mode .btnFunc:hover{
+  background-color: #4d4d4d!important;
+}
+.btnFunc:hover{
+  background-color: #edf5f9;
 }
 .dark-mode .topic #collapseExample .card-body {
   background-color: rgb(49, 49, 49)!important;
 }
 .dark-mode .topic #collapseExample .card-body ul li button{
   color: white;
-  background-color: rgb(49, 49, 49);
+  background-color: rgb(60, 60, 60);
 }
+.tag_link{
+  color: black;
+  text-decoration: none;
+  
+}
+.links-bottom{
+  display: flex;
+  align-items: center;
+}
+.rating{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-right: 30px;
+}
+.links-bottom>a{
+  margin-right: 30px!important;
+  }
 .dark-mode{
   color: white;
-  
+  background-color: #222 !important;
 }
 .navbar-brand:hover{
   transition: .3s;
@@ -779,6 +847,7 @@ main{
 }
 .dark-mode .topic #collapseExample .card-body{
   background-color: rgb(49, 49, 49)!important;
+  border: none;
 }
 
 .dark-mode .post_href:hover{
@@ -791,7 +860,7 @@ main{
   color: #C9D1D9;
 }
 .dark-mode .post_public_time{
-  color: #888;
+  color: #b5b5b5;
 }
 .dark-mode .sidebar{
   color: #C9D1D9;

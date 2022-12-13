@@ -7,6 +7,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
+	
 	config.allowedContent = {
 		$1: {
 			  elements: CKEDITOR.dtd,
@@ -16,4 +17,6 @@ CKEDITOR.editorConfig = function( config ) {
 			}
 		};
 	config.disallowedContent = '*[style]{*}'
+	config.codeSnippet_theme = 'github';
 };
+//config.extraPlugins = 'myplugin,anotherplugin';

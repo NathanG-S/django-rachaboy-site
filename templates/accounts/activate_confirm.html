@@ -1,2 +1,30 @@
+<!DOCTYPE html>
+{% extends 'post/main.html' %}
+{% block search %}
+{% endblock %}
+{% block search2 %}
+{% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Активация аккаунта</title>
 
-<h5>Здравствуйте {{user}}, пожалуйста подтвердите свой e-mail</h5>
+</head>
+<body>
+    {% block content %}
+    <style>
+        body{
+            background-color: #f0f0f0;
+        }
+        .h4{
+            font-family: 'Fira Sans',sans-serif;
+            margin-top: 30px;
+        }
+    </style>
+    <h4 class="h4">Здравствуйте {{user}}, на указанный вами E-mail придет сообщение, пожалуйста подтвердите свой E-mail для активации вашего аккаунта.</h4>    
+    {% endblock %}
+</body>
+</html>
+

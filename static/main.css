@@ -1,8 +1,21 @@
 main{
   background-color: #F0F0F0;
   display: flex;
-  
+  justify-content: center;
 }
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page{
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 .main_div{
   width: -webkit-fill-available;
   display: flex;
@@ -10,7 +23,7 @@ main{
   align-items: flex-end;
   justify-content: center;
   flex: 1;
-  max-width: 1200px;
+  max-width: 800px;
   margin-right: 16px;
 }
 .main{
@@ -28,15 +41,33 @@ ul{
   list-style: none;
 }
 .related_li:not(:first-child){
-  margin-top: 18px;
-    padding: 18px 0 0;
+    margin-top: 13px;
+    padding: 10px 0 0;
     border-top: 1px solid #eaeeef;
 }
 .related_posts{
   border-bottom: 10px solid #F0F0F0;
 }
+.dark-mode .related_header{
+  border-bottom: 1px solid #a7a7a7;
+}
+.dark-mode .related_li:not(:first-child){
+  border-top: 1px solid #757575;
+}
 article{
   margin-top: 10px;
+}
+.other .related_li:not(:first-child){
+  padding: 0;
+}
+
+.other .related_views{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.other .span_post{
+  margin-left: 2px;
 }
 .post_href_related{
   font-size: .875rem;
@@ -73,7 +104,7 @@ article{
   flex-direction: column;
   background-color: white;
   height: fit-content;
-  margin-right: 50px;
+  
 }
 .aside-main{
   background-color: white;
@@ -116,9 +147,7 @@ article{
   #nav2{
     display: none;
   }
-  .search_form{
-    display: none;
-  }
+
   #search{
     display: block !important;
     
@@ -242,7 +271,7 @@ article{
   color: rgb(182, 182, 182);
 }
 .dark-mode .post_h3:hover{
-  color: #4C8EAB !important;
+  color: #a4dced !important;
 }
 .post_h3:hover{
   color: #4C8EAB;
@@ -306,6 +335,18 @@ main{
 
   
 }
+.rate{
+    display: flex;
+    align-items: center;
+}
+.views{
+  display: flex;
+  align-items: center;
+}
+.fav{
+  display: flex;
+  align-items: center;
+}
 .page{
   background-color: #F0F0F0;
 }
@@ -320,6 +361,11 @@ main{
 }
 .link:hover{
   color:#4C8EAB;
+}
+@media screen and (max-width: 815px){
+.links-bottom{
+    justify-content: space-between;
+}
 }
 @media screen and (min-width: 1250px){
   .aside-main{
@@ -433,18 +479,25 @@ main{
 .search_form2 input{
   transition: .25s;
 }
-
+.pagination{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: white;
+  margin-top: 12px;
+  height: 49px;
+}
 
 .site-footer{
-
+  margin-top: auto;
   background-color:#2C3135;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
   color:#737373;
   position: relative;
-  top: 80px;
-}
+  top: 40px;
+  }
 .site-footer hr
 {
   border-top-color:#bbb;
@@ -664,9 +717,18 @@ main{
   display: flex;
   align-items: center;
 }
-
+.rating{
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-right: 30px;
+}
+.sidebar{
+  position: sticky;
+  top: 55px;
+}
 .span_post1{
-  margin-right: 13px;
+  margin-right: 35px;
   margin-top: 5px;
   color: #798e98;
   font-size: .8125rem;
@@ -675,17 +737,22 @@ main{
   line-height: 1;
 }
 .links-bottom>a{
-margin-right: 5px!important;
+margin-right: 30px!important;
 }
-
+.search_link{
+  margin-right: 10px!important;
+}
 .theme-btn{
   background: none;
   border: none;
-  margin-right: 5px;
+  margin-right: 15px;
 }
 .dark-mode{
   color: white;
   
+}
+body{
+  background-color: #F0F0F0!important;
 }
 .dark-mode main{
   background-color: #222;
@@ -739,8 +806,12 @@ margin-right: 5px!important;
 .dark-mode .post_href:hover{
   color:#a4dced;
 }
+
 .dark-mode  .post_rubric{
   color:#c9c9c9;
+}
+.dark-mode  .post_rubric:hover{
+  color:#a4dced;
 }
 .dark-mode .post_h3{
   color: #C9D1D9;
@@ -777,9 +848,15 @@ margin-right: 5px!important;
 .dark-mode .span_post{
   color: #e1e1e1;
 }
+.dark-mode{
+  background-color: #222 !important;
+}
 .dark-mode #nav2{
-
+  border-bottom: 1px solid #292929;
   background-color: rgb(49, 49, 49)!important;
+}
+#nav2{
+  border-bottom: 1px solid #dedede;
 }
 .dark-mode .link{
   color: white;
@@ -797,4 +874,14 @@ margin-right: 5px!important;
 .dark-mode .link:hover{
   color: #a4dced;
   text-shadow: 0px 0px 10px #03bdba;
+}
+
+.sidebar{
+  will-change: min-height;
+}
+
+.sidebar__inner{
+  transform: translate(0, 0); /* For browsers don't support translate3d. */
+  transform: translate3d(0, 0, 0);
+  will-change: position, transform;
 }
