@@ -30,6 +30,7 @@ from django.core.paginator import Paginator
 #Вывод всех постов на главную страницу(optimized 149 --> 10)
 def post(request):
     cache.delete('current_tag')
+    
     #now = datetime.now() - timedelta(hours=24*7)
     posts = Post.objects.select_related('rubric', 'author__profile', ).prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites').annotate(count = Count('views')).order_by('-published')
     rubrics = Rubric.objects.all()
@@ -437,8 +438,12 @@ def get_profile(request, user_id):
     profile = Profile.objects.get(user = user)
     posts = Post.objects.select_related('rubric', 'author__profile').prefetch_related('rates_plus', 'rates_minus', 'views').filter(author = user)
     rubrics = Rubric.objects.all()
+    if profile.followers.filter(id=request.user.id).exists():
+        is_follower = True
+    else:
+        is_follower = False
     context = {
-        
+        'is_follower' : is_follower,
         'user' : user,
         'posts' : posts,
         'rubrics' : rubrics,
@@ -459,6 +464,25 @@ def favourite_add(request, id):
         
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
     #return redirect('favourite_list')
+
+#Подписка на пользователя
+@login_required(login_url='login')
+def follow_user(request, id):
+    
+    profile = get_object_or_404(Profile, id=id)
+    if profile.followers.filter(id=request.user.id).exists():
+        profile.followers.remove(request.user)
+        
+    else:
+        profile.followers.add(request.user)
+        #cache.set('is_follower', True)
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+
+
+
 
 #Добавление в плюс рейтинг
 @login_required(login_url='login')

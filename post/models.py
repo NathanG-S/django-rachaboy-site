@@ -91,12 +91,17 @@ class Comment(models.Model):
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
         ordering = ['-published']
+
 #Добавить followers через MTM
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     profile_pic = models.ImageField(upload_to = 'profile_images', default='error.gif', null = True, blank = True)
     bio = models.TextField(max_length=255, blank=True)
     git_href = models.URLField(max_length=200, blank=True, null=True)
+    followers = models.ManyToManyField(User, verbose_name='Подписчики', default = None, blank=True, related_name='followers')
+
     def __str__(self):
         return self.user.username or ''
-        
+
+    def total_followers(self):
+        return self.followers.count()

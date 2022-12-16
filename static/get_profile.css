@@ -1,3 +1,6 @@
+body{
+  background-color: #F0F0F0!important;
+}
 main{
   background-color: #F0F0F0;
 }
@@ -123,6 +126,18 @@ main{
 }
 .git_href{
   margin-bottom: 10px;
+}
+.dark-mode{
+  background-color: #222!important;
+}
+.followers{
+  font-weight:500;
+}
+.dark-mode .info{
+  color: #e9e9e9;
+}
+.info{
+  color: black;
 }
 .links-bottom{
   display: flex;
@@ -401,6 +416,26 @@ main{
   font-weight: 500;
   line-height: 1.5rem;
   transition: .4s;
+}
+.follow_btn{
+  background-color: transparent;
+  border: 1px solid #75aeca;
+  border-radius: 3px;
+  color: #548eaa;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .8125rem;
+  
+  line-height: 2.25rem;
+  margin-top: 18px;
+  padding: 0 13px;
+  text-decoration: none;
+  transition: .5s;
+}
+.follow_btn:hover{
+    background-color: #7aa1bd;
+    border: 1px solid transparent;
+    color: #fff;
 }
 .span_post1{
   margin-right: 30px;
