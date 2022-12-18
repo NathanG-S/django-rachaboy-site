@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap" rel="stylesheet">
     <link id="link" href="" rel="stylesheet">
+    <link type="image/x-icon" rel="shortcut-icon" href="../../media/icon.png">
+    <link type="Image/x-icon" href="../../media/icon.png" rel="icon">
     <script src="../../static/ckeditor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
     {% block css %}<link rel="stylesheet" href="{% static 'main.css' %}">{% endblock %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -22,7 +24,7 @@
 <!--../../static/ckeditor/ckeditor/plugins/codesnippet/lib/highlight/styles/monokai_sublime.css-->
 </head>
 <body>
-  
+
       <nav class="navbar navbar-light  justify-content-between" id="nav"  >
         <a class="navbar-brand" href="{% url 'main' %}" style="color: white; margin-left:20px;">Rachaboy IT</a>
         
@@ -35,7 +37,7 @@
           </button>  
 
 
-          <a href="{% url 'search' %}" class="search_link" style="background: none; border:none; color: white; margin-left: 7px;margin-bottom: 3px; margin-top: 11px;">
+          <a href="{% url 'search' %}" class="search_link" style="background: none; border:none; color: white; margin-left: 7px;margin-bottom: 3px; margin-top: 11px!important;">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
             </svg>
@@ -43,7 +45,7 @@
 
           {% endblock %}
         
-          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" style=" border: none; margin: 5px; margin-right: 10px;">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" style=" border: none; margin: 5px!important; margin-right: 10px!important;">
             <!--<span class="navbar-toggler-icon"></span>-->
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" style=" color:white;" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -177,6 +179,7 @@
         </div>
 
       {% endblock %}
+      
       {% for post in page_obj %}
 
       
@@ -255,7 +258,7 @@
 
           </div>
         </div>
-
+        {% include 'post/parsed.html' %}
 
       {% endfor %}
       {% if page_obj.has_next or page_obj.has_previous %}
@@ -461,6 +464,13 @@
     }
   }
   document.addEventListener('DOMContentLoaded', onload)
+  salary = document.getElementsByClassName('statistic')
+  for (let index = 0; index < salary.length; index++) {
+    const elementSalary = salary[index];
+    if (index != 1) {
+      salary[index].style = "display:none;";
+    }
+  }
 
 </script>
 

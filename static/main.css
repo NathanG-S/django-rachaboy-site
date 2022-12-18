@@ -185,6 +185,15 @@ article{
     margin-right: 3px;
     margin-top: 10px;
   }
+  .statistic{
+    min-width: 0px;
+    width: 100% !important;
+    padding: 13px !important;
+    margin-left: 0px;
+    box-sizing: content-box;
+    position: relative;
+    margin-right: 3px;
+  }
   .topic{
     min-width: 0px;
     width: 100% !important;
@@ -884,4 +893,65 @@ body{
   transform: translate(0, 0); /* For browsers don't support translate3d. */
   transform: translate3d(0, 0, 0);
   will-change: position, transform;
+}
+
+.statistic{
+  background-color: white;
+  margin-top: 10px;
+  width: 100%;
+  font-family: 'Fira Sans',sans-serif;
+}
+.counter_h4{
+  color: #333;
+  font-weight: 500;
+  font-size: 18px;
+  margin-top: 10px;
+  
+}
+.counter_p{
+
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+.dark-mode .counter_p{
+  color: #f0f0f0!important;
+}
+.dark-mode .counter_h4{
+  margin-bottom: 2px;
+  color: #f0f0f0;
+}
+.dark-mode .statistic{
+  background-color: #333;
+}
+.counter_h4:hover{
+  transition: 0.45s;
+  color: #4C8EAB;
+}
+.dark-mode .counter_h4:hover{
+  color: #a4dced;
+}
+.salary_stats{
+  padding: 25px 17px 13px;
+  font-size: 0;
+  text-align: center;
+}
+.counter{
+  color: #72bb53;
+  vertical-align: top;
+  margin-bottom: 30px;
+}
+.summ{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+}
+.body{
+  max-width: 700px;
+}
+.description{
+  font-size: 15px;
+
+}
+.img{
+  width: 100%;
 }
