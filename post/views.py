@@ -479,11 +479,6 @@ def follow_user(request, id):
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-
-
-
-
-
 #Добавление в плюс рейтинг
 @login_required(login_url='login')
 def add_rate_plus(request, id):
