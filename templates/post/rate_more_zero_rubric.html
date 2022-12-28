@@ -5,24 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block title %} <title>Лучшие посты за неделю</title> {% endblock %}
+    {% block title %} <title>Рейтинг ≥ 0 </title> {% endblock %}
 </head>
 <body>
- 
+
     {% block content %}
-      <style>
+    <style>
       body{
         min-height: 100vh;
         display: flex;
         flex-direction: column;
       }
-        .search_form{
-          display: none;
-        }
-        .search_form2{
-          display: none;
-        }
-      </style>
+      .search_form{
+        display: none;
+      }
+      .search_form2{
+        display: none;
+      }
+    </style>
     {% if posts.count != 0 %}
     <main>
       <div class="main">
@@ -39,7 +39,7 @@
           margin: 0;
           text-decoration: none;
           overflow: hidden;
-          text-overflow: ellipsis;font-family: system-ui;">{{current_rubric}} (лучшие посты за неделю)</h1>
+          text-overflow: ellipsis;font-family: system-ui;">{{current_rubric}} (рейтинг ≥ 0)</h1>
           <p>
             <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
               Все подряд
@@ -50,17 +50,18 @@
           </p>
           <div class="collapse" id="collapseExample">
             <div class="card card-body" style="min-height: 230px; display: block;">
+
               <div class="btn-group">
                 <button type="button" style="margin-right: 3px;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Новые
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{% url 'rate_more_zero_rubric' %}">Рейтинг ≥ 0</a>
-                  <a class="dropdown-item" href="{% url 'rate_more_twenty_rubric' %}">Рейтинг ≥ 20</a>
-                  <a class="dropdown-item" href="{% url 'rate_more_fifty_rubric' %}">Рейтинг ≥ 50</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'rate_more_hundreed_rubric' %}">Рейтинг ≥ 100</a>
-                </div>
+                    <a class="dropdown-item" href="{% url 'rate_more_zero_rubric' %}">Рейтинг ≥ 0</a>
+                    <a class="dropdown-item" href="{% url 'rate_more_twenty_rubric' %}">Рейтинг ≥ 20</a>
+                    <a class="dropdown-item" href="{% url 'rate_more_fifty_rubric' %}">Рейтинг ≥ 50</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'rate_more_hundreed_rubric' %}">Рейтинг ≥ 100</a>
+                  </div>
               </div>
               <div class="btn-group">
                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -84,73 +85,81 @@
       {% for post in posts %}
 
       
-        <div class="post">
+      <div class="post">
         
-          <div class="post-img-author">
-            {% if post.author.profile.profile_pic %}
-            <a href="{% url 'get_profile' post.author.profile.user.id %}">
-              <img src="{{post.author.profile.profile_pic.url}}" alt="" style="height: 26px; width: 26px; max-width: 37px; max-height: 37px; border-radius:3px; margin-right: 10px;">
-            </a>
-            {% endif %}
-            <a href="{% url 'get_profile' post.author.profile.user.id %}" class="post_link_h3"><h3 style="margin-top: 15px;" class="post_h3">{{post.author}}</h3></a>
-            <span  class ="post_public_time">{{post.published}}</span>
-          </div>
-          {% if post.rubric %}
-          <a href="{{post.rubric.get_absolute_url}}" class="post_rubric" >{{post.rubric}}</a>
+        <div class="post-img-author">
+          {% if post.author.profile.profile_pic %}
+          <a href="{% url 'get_profile' post.author.profile.user.id %}">
+            <img src="{{post.author.profile.profile_pic.url}}" alt="" style="height: 26px; width: 26px; max-width: 37px; max-height: 37px; border-radius:3px; margin-right: 10px;">
+          </a>
           {% endif %}
+          <a href="{% url 'get_profile' post.author.profile.user.id %}" class="post_link_h3"><h3 style="margin-top: 15px;" class="post_h3">{{post.author}}</h3></a>
+          <span  class ="post_public_time">{{post.published}}</span>
+        </div>
+        {% if post.rubric %}
+        <a href="{{post.rubric.get_absolute_url}}" class="post_rubric" >{{post.rubric}}</a>
+        {% endif %}
+
+        <h2><a href="{{post.get_absolute_url}}" class="post_href">{{post.title}}</a></h2>
+          {% if post.image %}
+          <div class="image">
+            <img src="{{post.image.url}}" alt="" class="post-img">
+          </div>
+          
+          {% endif %}
+          <div class="post_content">
+              {{ post.description|truncatewords:1100|truncatechars:1200|safe }}
+              <br>
+              <a href="{{post.get_absolute_url}}" class="read_next">Читать далее</a>
+          </div>
+          
+          <div class="links-bottom">
+            <div class="rate">
+
             
-            <h2><a href="{{post.get_absolute_url}}" class="post_href">{{post.title}}</a></h2>
-            {% if post.image %}
-            <div class="image">
-              <img src="{{post.image.url}}" alt="" class="post-img">
-            </div>
-            
+            {% if post.total_rate > 0 %}
+            <span class="span_post1" style="margin-right: 0px; margin-top: 2px; color: #7aa600;">+{{post.total_rate}}</span>
+            {% elif post.total_rate == 0 %}
+            <span class="span_post1" style="margin-right: 0px; margin-top: 2px;">{{post.total_rate}}</span>
+            {% else %}
+            <span class="span_post1" style="margin-right: 0px; margin-top: 2px;color: #d04e4e;">{{post.total_rate}}</span>
             {% endif %}
-            <div class="post_content">
-                {{ post.description|truncatewords:1100|truncatechars:1200|safe }}
-                <br>
-                <a href="{{post.get_absolute_url}}" class="read_next">Читать далее</a>
+            <div class="rating">
+              <a href="{% url 'add_rate_plus' post.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" style="color:#558CB7;" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
+                  <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/>
+                </svg>
+              </a>
+              <a href="{% url 'add_rate_minus' post.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" style="color:#558CB7;" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                  <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                </svg>
+              </a>
             </div>
-            
-  
-            <div class="links-bottom">
-              {% if post.total_rate > 0 %}
-              <span class="span_post1" style="margin-right: 0px; margin-top: 2px; color: #7aa600;">+{{post.total_rate}}</span>
-              {% elif post.total_rate == 0 %}
-              <span class="span_post1" style="margin-right: 0px; margin-top: 2px;">{{post.total_rate}}</span>
-              {% else %}
-              <span class="span_post1" style="margin-right: 0px; margin-top: 2px;color: #d04e4e;">{{post.total_rate}}</span>
-              {% endif %}
-              <div class="rating">
-                <a href="{% url 'add_rate_plus' post.id %}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" style="color:#558CB7;" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
-                    <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/>
-                  </svg>
-                </a>
-                <a href="{% url 'add_rate_minus' post.id %}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" style="color:#558CB7;" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
-                    <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
-                  </svg>
-                </a>
-              </div>
-  
-              <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" style="color:#558CB7; margin-top:5px;">
-                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
-                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
-              </svg>
-              <span class = 'span_post1'>{{post.total_views}}</span>
-              <a href="{% url 'by_comment' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-text" viewBox="0 0 16 16" style="margin-right:10px; color:#558CB7;">
-                <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-                <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8zm0 2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
-              </svg></a>
-            <a href="{% url 'favourite_add' post.id %}" " style="margin-right:10px;">
+          </div>
+          <div class="views">
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" style="color:#558CB7; margin-top:5px;">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+            </svg>
+            <span class = 'span_post1'>{{post.total_views}}</span>
+          </div>
+
+            <a href="{% url 'by_comment' post.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-chat-text" viewBox="0 0 16 16" style="margin-right:10px; color:#558CB7;">
+              <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
+              <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8zm0 2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+            </svg></a>
+            <div class="fav">
+              <a href="{% url 'favourite_add' post.id %}" " style="margin-right:2px!important;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16" id="bookmark" style="color:#558CB7;">
                     <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"></path>
                 </svg>
             </a>
-  
-          </div>
+            <span class = 'span_post1'>{{post.total_fav}}</span>
+            </div>
+
         </div>
+      </div>
 
 
       {% endfor %}
@@ -192,7 +201,7 @@
       <div class="aside">
         <aside class="aside-main">
           <div class="info" style="margin: 10px;">
-            <h4> <a href="{% url 'about' %}" class="about_link"> Правила сайта</a></h4>
+            <h4><a href="{% url 'about' %}" class="about_link"> Правила сайта</a></h4>
             <p style="font-family:Arial;">
                 Обычно IT-специалисты и интересующиеся данной сферой — это люди культурные, уважающие не только себя, но и собеседников и читателей. Чтобы ресурс мог оставаться площадкой для общения таких людей, существуют правила, за нарушение которых модераторы могут понизить права аккаунта до ReadOnly.
                 Вот список того, чего не следует делать:
@@ -202,7 +211,7 @@
                 <p><strong>Просим вас не нарушать правила этой площадки во избежание различных ограничений и конфликтов</strong></p>
               </li>
             </ul>
-
+            <a href="{% url 'about' %}" style="text-decoration: none; transition:0.2s;">Ознакомиться</a>
           </div>
         </aside>
       </div>

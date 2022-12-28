@@ -30,7 +30,7 @@ from django.core.paginator import Paginator
 #Вывод всех постов на главную страницу(optimized 149 --> 10)
 def post(request):
     cache.delete('current_tag')
-    
+    cache.delete('current_rubric')
     #now = datetime.now() - timedelta(hours=24*7)
     posts = Post.objects.select_related('rubric', 'author__profile', ).prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites').annotate(count = Count('views')).order_by('-published')
     rubrics = Rubric.objects.all()
@@ -271,7 +271,7 @@ def by_comment(request, post_id):
     return render(request, 'post/by_comment.html', context)
 
 
-#Создание постов
+#Создание постов 
 class PostCreateView(LoginRequiredMixin,CreateView):
     login_url = '/login/'
     model = Post
@@ -681,7 +681,7 @@ def rate_more_twenty(request):
     return render(request, 'post/rate_more_twenty.html', context)
 
 
-#Публикации с рейтнгом >= 50
+#Публикации с рейтингом >= 50
 def rate_more_fifty(request):
     posts = Post.objects.select_related('rubric', 'author__profile')\
         .prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites')\
@@ -703,7 +703,7 @@ def rate_more_fifty(request):
 
     return render(request, 'post/rate_more_fifty.html', context)
 
-#Публикации с рейтнгом >= 100
+#Публикации с рейтингом >= 100
 def rate_more_hundreed(request):
     posts = Post.objects.select_related('rubric', 'author__profile')\
         .prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites')\
@@ -725,6 +725,107 @@ def rate_more_hundreed(request):
 
     return render(request, 'post/rate_more_hundreed.html', context)
 
+#Публикации с рейтингом >= 0 в конкретной рубрике
+def rate_more_zero_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites')\
+            .annotate(total = Count('rates_plus', distinct=True) - Count('rates_minus', distinct=True)).filter(rubric = current_rubric).filter(total__gte = 0).order_by('-published')
+
+    posted = Post.objects.prefetch_related('views').all()
+    rubrics = Rubric.objects.all()
+
+    context = {
+        'posts' : posts,
+        'posted' : posted,
+        'rubrics' : rubrics,
+        'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/rate_more_zero_rubric.html', context)
+
+#Публикации с рейтингом >= 20 в конкретной рубрике
+def rate_more_twenty_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites')\
+            .annotate(total = Count('rates_plus', distinct=True) - Count('rates_minus', distinct=True)).filter(rubric = current_rubric).filter(total__gte = 20).order_by('-published')
+
+    posted = Post.objects.prefetch_related('views').all()
+    rubrics = Rubric.objects.all()
+
+    context = {
+        'posts' : posts,
+        'posted' : posted,
+        'rubrics' : rubrics,
+        'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/rate_more_twenty_rubric.html', context)
+
+
+#Публикации с рейтингом >= 50 в конкретной рубрике
+def rate_more_fifty_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites')\
+            .annotate(total = Count('rates_plus', distinct=True) - Count('rates_minus', distinct=True)).filter(rubric = current_rubric).filter(total__gte = 50).order_by('-published')
+
+    posted = Post.objects.prefetch_related('views').all()
+    rubrics = Rubric.objects.all()
+
+    context = {
+        'posts' : posts,
+        'posted' : posted,
+        'rubrics' : rubrics,
+        'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/rate_more_fifty_rubric.html', context)
+
+
+#Публикации с рейтингом >= 100 в конкретной рубрике
+def rate_more_hundreed_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views', 'favourites')\
+            .annotate(total = Count('rates_plus', distinct=True) - Count('rates_minus', distinct=True)).filter(rubric = current_rubric).filter(total__gte = 100).order_by('-published')
+
+    posted = Post.objects.prefetch_related('views').all()
+    rubrics = Rubric.objects.all()
+
+    context = {
+        'posts' : posts,
+        'posted' : posted,
+        'rubrics' : rubrics,
+        'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/rate_more_hundreed_rubric.html', context)
 
 #Лучшие посты за сутки в конкретной категории
 def day_post_rubric(request):
