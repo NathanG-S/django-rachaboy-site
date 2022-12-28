@@ -1,6 +1,6 @@
 {% extends 'post/main.html' %}
 {% load static %}
-{% block title %} <title>John banned you</title> {% endblock %}
+{% block title %} <title>John have banned you</title> {% endblock %}
 {% block content %}
 <style>
     #nav2{
@@ -16,7 +16,7 @@
         <li>Редактирование своих постов</li>
         <li>Изменение рейтинга постов</li>
     </ul>
-    <h3>Просим вас больше не нарушать правил сайта, иначе ваш аккаунт будет полностью и невозвратно заблокирован. По всем вопросам обращаться в <a href="{% url 'feedback' %}" style="text-decoration: none;">Тех. поддержку</a></h3>
+    <h3>Просим вас больше не нарушать правила сайта, иначе ваш аккаунт будет полностью и невозвратно заблокирован. По всем вопросам обращаться в <a href="{% url 'feedback' %}" style="text-decoration: none;">Тех. поддержку</a></h3>
 </div>
 
 {% endblock %}

@@ -726,6 +726,113 @@ def rate_more_hundreed(request):
     return render(request, 'post/rate_more_hundreed.html', context)
 
 
+#Лучшие посты за сутки в конкретной категории
+def day_post_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posted = Post.objects.prefetch_related('views').all()
+    now = datetime.now() - timedelta(hours=24)
+    rubrics = Rubric.objects.all()
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views')\
+            .filter(published__gte = now).filter(rubric = current_rubric).annotate(total=Count('views')).order_by('-total')
+
+    context = {
+    'posted' : posted,
+    'posts' : posts,
+    'rubrics' : rubrics,
+    'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+    
+    return render(request, 'post/day_post_rubric.html', context)
+
+#Лучшие посты за неделю в конкретной категории
+
+def week_post_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posted = Post.objects.prefetch_related('views').all()
+    now = datetime.now() - timedelta(hours=24*7)
+    rubrics = Rubric.objects.all()
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views')\
+            .filter(published__gte = now).filter(rubric = current_rubric).annotate(total=Count('views')).order_by('-total')
+
+    context = {
+    'posted' : posted,
+    'posts' : posts,
+    'rubrics' : rubrics,
+    'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/week_post_rubric.html', context)
+
+#Лучшие публикации за месяц
+def month_post_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posted = Post.objects.prefetch_related('views').all()
+    now = datetime.now() - timedelta(hours=24*30)
+    rubrics = Rubric.objects.all()
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views')\
+            .filter(published__gte = now).filter(rubric = current_rubric).annotate(total=Count('views')).order_by('-total')
+
+    context = {
+    'posted' : posted,   
+    'posts' : posts,
+    'rubrics' : rubrics,
+    'current_rubric' : current_rubric,
+    }
+
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/month_post_rubric.html', context)
+#83
+#Лучшие публикации за год
+def year_post_rubric(request):
+    current_rubric = cache.get('current_rubric')
+    posted = Post.objects.prefetch_related('views').all()
+    now = datetime.now() - timedelta(hours=24*30*12)
+    rubrics = Rubric.objects.all()
+    posts = Post.objects.select_related('rubric', 'author__profile')\
+        .prefetch_related('rates_plus', 'rates_minus', 'views')\
+            .filter(published__gte = now).filter(rubric = current_rubric).annotate(total=Count('views')).order_by('-total')
+
+    context = {
+    'posted' : posted,    
+    'posts' : posts,
+    'rubrics' : rubrics,
+    'current_rubric' : current_rubric,
+    }
+
+    related_posts = [(i.views.count(), i.title) for i in context.get('posted')]
+    related_posts = sorted(related_posts)[::-1][:4]
+    related_lst = [y for x in related_posts for y in x if type(y) == str]
+    related_post = Post.objects.prefetch_related('views').filter(title__in = related_lst)
+    context['related_posts'] = related_post
+
+    return render(request, 'post/year_post_rubric.html', context)
+
+
+
+
+
+
 #Для авторов
 def to_authors(request):
     rubrics = Rubric.objects.all()

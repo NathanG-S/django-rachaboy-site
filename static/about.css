@@ -209,6 +209,9 @@ main{
     font-family: 'Fira Sans', sans-serif; 
   
   }
+  .search_link{
+    margin-right: 10px;
+  }
   .post_h3{
       font-family: Arial, Helvetica, sans-serif;
       font-size: 15px;
@@ -615,7 +618,7 @@ ul{
 .theme-btn{
   background: none;
   border: none;
-  margin-right: 5px;
+  margin-right: 15px;
 }
 .dark-mode{
   color: rgb(226, 226, 226);

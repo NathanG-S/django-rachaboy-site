@@ -243,6 +243,9 @@ main{
     margin-left: 2px;
     line-height: 1;
   }
+  .dark-mode .span_post1{
+    color: #dadada;
+  }
   .post_rubric{
       -webkit-font-smoothing: antialiased;
       color: #5e6973;

@@ -9,11 +9,12 @@ main{
   align-items: flex-end;
   justify-content: center;
   flex: 1;
-  max-width: 1200px;
+  max-width: 800px;
   margin-right: 16px;
 }
 .main{
   display: flex;
+  justify-content: center;
 }
 .related_header{
   display: flex;
@@ -695,6 +696,12 @@ margin-right: 30px!important;
 .dark-mode{
   color: white;
   
+}
+#nav2{
+  border-bottom: 1px solid #dedede;
+}
+.dark-mode #nav2{
+  border-bottom: 1px solid #292929;
 }
 .search_link{
   margin-right: 10px;

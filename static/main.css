@@ -803,7 +803,7 @@ body{
   background-color: rgb(49, 49, 49)!important;
 }
 .dark-mode .topic > h1{
-  color: white!important;
+  color: #f7f7f7!important;
 }
 .dark-mode .topic > p > button{
   color: white;

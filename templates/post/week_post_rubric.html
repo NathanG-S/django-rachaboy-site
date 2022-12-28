@@ -39,7 +39,7 @@
           margin: 0;
           text-decoration: none;
           overflow: hidden;
-          text-overflow: ellipsis;font-family: system-ui;">Лучшие посты за неделю</h1>
+          text-overflow: ellipsis;font-family: system-ui;">{{current_rubric}} (лучшие посты за неделю)</h1>
           <p>
             <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
               Все подряд
@@ -67,11 +67,11 @@
                   Лучшие
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="{% url 'day_post' %}">Сутки</a>
-                  <a class="dropdown-item" href="{% url 'week_post' %}">Неделя</a>
-                  <a class="dropdown-item" href="{% url 'month_post' %}">Месяц</a>
+                  <a class="dropdown-item" href="{% url 'day_post_rubric' %}">Сутки</a>
+                  <a class="dropdown-item" href="{% url 'week_post_rubric' %}">Неделя</a>
+                  <a class="dropdown-item" href="{% url 'month_post_rubric' %}">Месяц</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="{% url 'year_post' %}">Год</a>
+                  <a class="dropdown-item" href="{% url 'year_post_rubric' %}">Год</a>
                 </div>
               </div>
             </div>
