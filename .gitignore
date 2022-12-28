@@ -1,3 +1,6 @@
 /postsite
 /media
 /.vscode
+dumpdata.json
+.DS_Store
+db.sqlite3
